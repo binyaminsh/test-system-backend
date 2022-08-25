@@ -3,11 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CompaniesModule } from './companies/companies.module';
+import { TopicsModule } from './topics/topics.module';
 
 @Module({
   imports: [
     UsersModule,
     MongooseModule.forRoot('mongodb://localhost:27017/test-system-db'),
+    CompaniesModule,
+    TopicsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
