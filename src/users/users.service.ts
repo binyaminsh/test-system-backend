@@ -8,12 +8,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>){}
+  constructor(@InjectModel(User.name) private readonly userModel: Model<UserDocument>){}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<UserDocument> {
     try {
-      const user = await this.userModel.find({username: createUserDto.username, password: createUserDto.password})
-      return !user ? new this.userModel(createUserDto).save() : null;
+      const user = new this.userModel(createUserDto);
+      return user.save();
     } catch (error) {
       throw new Error(error.message)
     }
@@ -26,7 +26,9 @@ export class UsersService {
   async findOne(id: string): Promise<User> {
     return this.userModel.findOne({_id: id});
   }
-
+  async findByUsername(username: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({username}).exec();
+  }
   async update(id: string, updateUserDto: UpdateUserDto) {
     return this.userModel.updateOne({_id: id}, {$set: {...updateUserDto}});
   }

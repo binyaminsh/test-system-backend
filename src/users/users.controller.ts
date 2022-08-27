@@ -1,10 +1,12 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Param, Delete, Put, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
+@UseGuards(JwtGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -41,10 +43,8 @@ export class UsersController {
   ) {
     const user = await this.usersService.login(loginRequest);
     if (user !== null) {
-      console.log(user);
       res.status(200);
     } else {
-      console.log(user);
       res.status(401);
     }
   }
