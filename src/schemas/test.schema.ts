@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { Delivery } from './deliver.schema';
+import { Delivery } from './delivery.schema';
 import { Question } from './question.schema';
 import { Topic } from './topic.scheme';
 
@@ -38,9 +38,6 @@ export class Test {
 
   @Prop({ required: true, type: [{type: mongoose.Types.ObjectId, ref: 'Question'}]})
   questions: Question[];
-
-  @Prop({ required: true })
-  date: Date;
 
   @Prop()
   delivery: Delivery;
