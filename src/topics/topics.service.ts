@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -20,10 +21,16 @@ export class TopicsService {
 
   async findAll() {
     try {
-      return this.topicModel.find().populate('companyId');
+      return this.topicModel.find().select({ __v: 0}).populate({path: 'companies', select: ['_id', 'name']})
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+
+  async findAllByAccount(accountId: string){
+    const topics = await this.topicModel.find({companies: accountId}).select({ _id: 1, name: 1})
+    
+    return topics;
   }
 
   async findOne(id: string) {

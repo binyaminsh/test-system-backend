@@ -5,12 +5,11 @@ export type AnswerDocument = Answer & Document;
 
 @Schema()
 export class Answer {
-
   @Prop({ required: true })
   id: number;
 
   @Prop({ required: true })
-  name: string;
+  content: string;
 
   @Prop({ required: true })
   isCorrect: boolean;

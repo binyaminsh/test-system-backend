@@ -20,7 +20,7 @@ export class CompaniesService {
 
   async findAll() {
     try {
-      return this.companyModel.find(); //.populate({path: 'topics', select: ['_id', 'name']})
+      return this.companyModel.find().select({ __v: 0}).populate({path: 'topics', select: ['_id', 'name']})
     } catch (error) {
       throw new Error(error.message)
     }

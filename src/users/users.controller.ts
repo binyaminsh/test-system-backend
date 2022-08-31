@@ -36,16 +36,16 @@ export class UsersController {
     return this.usersService.remove(id);
   }
 
-  @Post('login')
-  async Login(
-    @Res({ passthrough: true }) res: Response,
-    @Body() loginRequest: UpdateUserDto,
-  ) {
-    const user = await this.usersService.login(loginRequest);
-    if (user !== null) {
-      res.status(200);
-    } else {
-      res.status(401);
-    }
-  }
+  // @Post('login')
+  // async Login(
+  //   @Res({ passthrough: true }) res: Response,
+  //   @Body() loginRequest: UpdateUserDto,
+  // ) {
+  //   const user = await this.usersService.login(loginRequest);
+  //   if (user !== null) {
+  //     res.status(200);
+  //   } else {
+  //     res.status(401);
+  //   }
+  // }
 }

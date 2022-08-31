@@ -8,6 +8,7 @@ import { Topic, TopicSchema } from 'src/schemas/topic.scheme';
 @Module({
   imports: [MongooseModule.forFeature([{ name: Topic.name, schema: TopicSchema }])],
   controllers: [TopicsController],
-  providers: [TopicsService]
+  providers: [TopicsService],
+  exports: [TopicsService],
 })
 export class TopicsModule {}

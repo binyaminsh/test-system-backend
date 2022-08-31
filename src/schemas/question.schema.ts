@@ -13,8 +13,8 @@ export class Question {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ required: true, type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Topic' }] })
-  topicsId: Topic[]
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Topic' })
+  topicId: Topic
 
   @Prop({ required: true })
   type: string;
@@ -22,8 +22,11 @@ export class Question {
   @Prop()
   lowerContent: string;
 
-  @Prop({ required: true, type: [{type: mongoose.Types.ObjectId, ref: 'Answer'}]})
+  @Prop({ required: true })
   answers: Answer[]
+
+  @Prop({ required: true })
+  answersLayout: string;
 
   @Prop({ required: true })
   tags: string[];

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { BadRequestException, Body, Controller, HttpCode, HttpException, HttpStatus, Post } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Post } from '@nestjs/common';
 import { STATUS_CODES } from 'http';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { ReturnUserDto } from 'src/users/dto/return-user.dto';

@@ -11,8 +11,8 @@ export class Topic {
   @Prop({ required: true })
   name: string;
 
-  @Prop({required: true, type: mongoose.Schema.Types.ObjectId, ref: 'Company'})
-  companyId: Company
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Company' }] })
+  companies: Company[]
 }
 
 export const TopicSchema = SchemaFactory.createForClass(Topic);

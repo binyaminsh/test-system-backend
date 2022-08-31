@@ -36,9 +36,4 @@ export class UsersService {
   async remove(id: string) {
     return this.userModel.deleteOne({_id: id});
   }
-
-  async login(updateUserDto: UpdateUserDto){
-    return this.userModel
-    .findOne({username: updateUserDto.username, password: updateUserDto.password})
-  }
 }

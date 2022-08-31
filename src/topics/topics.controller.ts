@@ -18,6 +18,11 @@ export class TopicsController {
     return this.topicsService.findAll();
   }
 
+  @Get('/account/:id')
+  findAllByAccount(@Param('id') id: string) {
+    return this.topicsService.findAllByAccount(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.topicsService.findOne(id);
