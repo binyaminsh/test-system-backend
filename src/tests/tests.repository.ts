@@ -25,4 +25,16 @@ export class TestsRepository {
       //.populate('questions')
       .exec();
   }
+
+  async findAllByQuestionId(id: string) {
+    return await this.testModel.find({"questions": id }).exec();
+  }
+
+  async delete(id: string) {
+    try {
+      return await this.testModel.deleteOne({ _id: id });
+    } catch (error) {
+      throw new Error(error.message)
+    }
+  }
 }

@@ -29,4 +29,25 @@ export class TestsService {
   async getAll() {
     return await this.testsRepository.getAll();
   }
+
+  async findAllByQuestionId(id: string) {
+    return await this.testsRepository.findAllByQuestionId(id);
+  }
+
+  async delete(id: string) {
+    try {
+      // delete tests references from questions
+      const questions = await this.questionsRepository.findAllByTest(id);
+      questions.forEach(async (question) => {
+        const filteredTests = question.tests.filter((test) => {
+          return test.toString() !== id;
+        });
+        question.tests = [...filteredTests];
+        await question.save();
+      });
+      return await this.testsRepository.delete(id);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }

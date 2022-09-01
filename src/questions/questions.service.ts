@@ -6,11 +6,13 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 import { QuestionsRepository } from './questions.repository';
 import { AnswersRepository } from 'src/answers/answers.repository';
 import { Answer } from 'src/schemas/answer.schema';
+import { TestsRepository } from 'src/tests/tests.repository';
 @Injectable()
 export class QuestionsService {
   constructor(
     private readonly questionsRepository: QuestionsRepository,
     private readonly answersRepository: AnswersRepository,
+    private readonly testsRepository: TestsRepository,
   ) {}
   async create(createQuestionDto: CreateQuestionDto) {
     try {
@@ -46,6 +48,16 @@ export class QuestionsService {
   }
   async remove(id: string) {
     try {
+      // removing the question from tests.
+      const filteredTests = await this.testsRepository.findAllByQuestionId(id);
+      filteredTests.forEach(async (test) => {
+        const filteredQuestions = test.questions.filter((question) => {
+          return question.toString() !== id;
+        });
+        test.questions = [...filteredQuestions];
+        await test.save();
+      });
+
       return await this.questionsRepository.remove(id);
     } catch (error) {
       throw Error(error.message);

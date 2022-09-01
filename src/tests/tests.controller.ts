@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateTestDto } from './dto/create-test.dto';
 import { TestsService } from './tests.service';
 
@@ -17,5 +17,10 @@ export class TestsController {
     } catch (error) {
       throw Error(error.message);
     }
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return await this.testService.delete(id);
   }
 }

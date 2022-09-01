@@ -11,7 +11,6 @@ import { JwtGuard } from './auth/guards/jwt.guard';
 import { QuestionsModule } from './questions/questions.module';
 import { AnswersModule } from './answers/answers.module';
 import { TestsModule } from './tests/tests.module';
-import { RepositoriesModule } from './repositories/repositories.module';
 
 @Module({
   imports: [
@@ -23,7 +22,6 @@ import { RepositoriesModule } from './repositories/repositories.module';
     QuestionsModule,
     AnswersModule,
     TestsModule,
-    RepositoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGuard }],

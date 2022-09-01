@@ -64,4 +64,8 @@ export class QuestionsRepository {
       throw Error(error.message);
     }
   }
+
+  async findAllByTest(id: string) {
+    return await this.questionModel.find({"tests": id }).exec();
+  }
 }
