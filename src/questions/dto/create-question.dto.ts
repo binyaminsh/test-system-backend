@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Answer } from 'src/schemas/answer.schema';
 
 export class CreateQuestionDto {

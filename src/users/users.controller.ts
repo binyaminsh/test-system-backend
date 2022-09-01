@@ -1,6 +1,13 @@
-// eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Param, Delete, Put, Res, UseGuards } from '@nestjs/common';
-import { Response } from 'express';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -35,17 +42,4 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
-
-  // @Post('login')
-  // async Login(
-  //   @Res({ passthrough: true }) res: Response,
-  //   @Body() loginRequest: UpdateUserDto,
-  // ) {
-  //   const user = await this.usersService.login(loginRequest);
-  //   if (user !== null) {
-  //     res.status(200);
-  //   } else {
-  //     res.status(401);
-  //   }
-  // }
 }

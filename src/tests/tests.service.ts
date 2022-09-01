@@ -1,24 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { TestDocument } from 'src/schemas/test.schema';
+import { QuestionsRepository } from 'src/questions/questions.repository';
 import { CreateTestDto } from './dto/create-test.dto';
+import { TestsRepository } from './tests.repository';
 
 @Injectable()
 export class TestsService {
-  constructor(@InjectModel('Test') private testModel: Model<TestDocument>) {}
+  constructor(
+    private readonly testsRepository: TestsRepository,
+    private readonly questionsRepository: QuestionsRepository,
+  ) {}
 
   async create(createTestDto: CreateTestDto) {
-    const test = new this.testModel(createTestDto);
-    return await test.save();
+    try {
+      const test = await this.testsRepository.create(createTestDto);
+
+      //update tests reference on each question
+      const updatedQuestions = await Promise.all(
+        test.questions.map(async (question) => {
+          return await this.questionsRepository.updateTests(question, test._id);
+        }),
+      );
+      return test;
+    } catch (error) {
+      throw Error(error.message);
+    }
   }
 
   async getAll() {
-    return await this.testModel
-      .find()
-      .select({ __v: 0 })
-      .populate('topic', 'name')
-      //.populate('questions')
-      .exec();
+    return await this.testsRepository.getAll();
   }
 }

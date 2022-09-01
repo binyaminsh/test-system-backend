@@ -12,6 +12,10 @@ export class TestsController {
   }
   @Post()
   async create(@Body() createTestDto: CreateTestDto) {
-    return await this.testService.create(createTestDto);
+    try {
+      return await this.testService.create(createTestDto);
+    } catch (error) {
+      throw Error(error.message);
+    }
   }
 }
