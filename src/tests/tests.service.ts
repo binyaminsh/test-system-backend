@@ -31,6 +31,9 @@ export class TestsService {
     return await this.testsRepository.getAll();
   }
 
+  async findAllByTopic(topicId: string) {
+    return await this.testsRepository.findAllByTopic(topicId);
+  }
   async findAllByQuestionId(id: string) {
     return await this.testsRepository.findAllByQuestionId(id);
   }

@@ -42,4 +42,10 @@ export class TestsRepository {
   async update(id: string, updateTestDto: UpdateTestDto) {
     return await this.testModel.findByIdAndUpdate(id, updateTestDto).exec();
   }
+
+  async findAllByTopic(topicId: string) {
+    const tests = await this.testModel.find({topic: topicId}).exec();
+    console.log(tests.length)
+    return await this.testModel.find({topic: topicId}).exec();
+  }
 }

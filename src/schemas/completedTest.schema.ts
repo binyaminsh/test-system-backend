@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Date } from 'mongoose';
 import { Student } from './student.schema';
@@ -6,10 +5,10 @@ import { StudentAnswers } from './studentAnswers.schema';
 import { Test } from './test.schema';
 
 
-export type AnswerDocument = Answer & Document;
+export type CompletedTestDocument = CompletedTest & Document;
 
-@Schema()
-export class Answer {
+@Schema({ timestamps: true })
+export class CompletedTest {
 
   @Prop({ required: true, type: mongoose.Types.ObjectId, ref: 'Test'})
   testId: Test;
@@ -23,8 +22,8 @@ export class Answer {
   @Prop({ required: true })
   score: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, type: Date })
   date: Date
 }
 
-export const AnswerSchema = SchemaFactory.createForClass(Answer);
+export const CompletedTestSchema = SchemaFactory.createForClass(CompletedTest);

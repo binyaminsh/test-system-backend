@@ -9,8 +9,10 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtGuard } from './auth/guards/jwt.guard';
 import { QuestionsModule } from './questions/questions.module';
-import { AnswersModule } from './answers/answers.module';
 import { TestsModule } from './tests/tests.module';
+import { StudentsModule } from './students/students.module';
+import { CompletedTestsModule } from './completed-tests/completed-tests.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -20,8 +22,10 @@ import { TestsModule } from './tests/tests.module';
     TopicsModule,
     AuthModule,
     QuestionsModule,
-    AnswersModule,
     TestsModule,
+    StudentsModule,
+    CompletedTestsModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_GUARD, useClass: JwtGuard }],

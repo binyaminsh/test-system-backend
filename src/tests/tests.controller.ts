@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Patch,
+  Query,
+} from '@nestjs/common';
 import { CreateTestDto } from './dto/create-test.dto';
 import { UpdateTestDto } from './dto/update-test.dto';
 import { TestsService } from './tests.service';
@@ -10,6 +19,10 @@ export class TestsController {
   @Get()
   async getAll() {
     return await this.testService.getAll();
+  }
+  @Get('byTopic')
+  async findAllByTopic(@Query('topicId') topicId: string) {
+    return await this.testService.findAllByTopic(topicId);
   }
   @Post()
   async create(@Body() createTestDto: CreateTestDto) {

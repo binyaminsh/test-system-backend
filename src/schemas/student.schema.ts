@@ -1,11 +1,8 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
-
 
 export type StudentDocument = Student & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Student {
 
     @Prop({required: true})
