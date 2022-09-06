@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { TestDocument } from 'src/schemas/test.schema';
 import { CreateTestDto } from './dto/create-test.dto';
+import { UpdateTestDto } from './dto/update-test.dto';
 
 @Injectable()
 export class TestsRepository {
@@ -36,5 +37,9 @@ export class TestsRepository {
     } catch (error) {
       throw new Error(error.message)
     }
+  }
+
+  async update(id: string, updateTestDto: UpdateTestDto) {
+    return await this.testModel.findByIdAndUpdate(id, updateTestDto).exec();
   }
 }

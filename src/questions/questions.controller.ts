@@ -6,7 +6,9 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
+import mongoose from 'mongoose';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { QuestionsService } from './questions.service';
@@ -36,8 +38,10 @@ export class QuestionsController {
     }
   }
 
-  @Get(':topicId')
-  async getAllByTopic(@Param('topicId') topicId: string) {
+  @Get()
+  async getAllByTopic(@Query('topicId') topicId: string) {
+    // const id = new mongoose.Types.ObjectId(topicId)
+    // console.log(id)
     return await this.questionsService.getAllByTopic(topicId);
   }
 

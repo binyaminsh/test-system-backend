@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { QuestionsRepository } from 'src/questions/questions.repository';
 import { CreateTestDto } from './dto/create-test.dto';
+import { UpdateTestDto } from './dto/update-test.dto';
 import { TestsRepository } from './tests.repository';
 
 @Injectable()
@@ -49,5 +50,9 @@ export class TestsService {
     } catch (error) {
       throw new Error(error.message);
     }
+  }
+
+  async update(id: string, updateTestDto:UpdateTestDto) {
+    return await this.testsRepository.update(id, updateTestDto);
   }
 }

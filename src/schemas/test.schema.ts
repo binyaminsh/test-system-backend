@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Delivery } from './delivery.schema';
@@ -7,7 +6,7 @@ import { Topic } from './topic.scheme';
 
 export type TestDocument = Test & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Test {
   @Prop({ required: true, type: mongoose.Types.ObjectId, ref: 'Topic'})
   topic: Topic;

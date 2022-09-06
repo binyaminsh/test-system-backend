@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
 import { CreateTestDto } from './dto/create-test.dto';
+import { UpdateTestDto } from './dto/update-test.dto';
 import { TestsService } from './tests.service';
 
 @Controller('tests')
@@ -18,7 +19,10 @@ export class TestsController {
       throw Error(error.message);
     }
   }
-
+  @Patch(':id')
+  async update(@Param('id') id: string, updateTestDto: UpdateTestDto) {
+    return await this.testService.update(id, updateTestDto);
+  }
   @Delete(':id')
   async delete(@Param('id') id: string) {
     return await this.testService.delete(id);

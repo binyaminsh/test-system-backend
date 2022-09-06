@@ -4,25 +4,15 @@ import { CreateQuestionDto } from './dto/create-question.dto';
 import { Question } from '../schemas/question.schema';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { QuestionsRepository } from './questions.repository';
-import { AnswersRepository } from 'src/answers/answers.repository';
-import { Answer } from 'src/schemas/answer.schema';
 import { TestsRepository } from 'src/tests/tests.repository';
 @Injectable()
 export class QuestionsService {
   constructor(
     private readonly questionsRepository: QuestionsRepository,
-    private readonly answersRepository: AnswersRepository,
     private readonly testsRepository: TestsRepository,
   ) {}
   async create(createQuestionDto: CreateQuestionDto) {
     try {
-      const answers: Answer[] = await Promise.all(
-        createQuestionDto.answers.map(async (answer): Promise<Answer> => {
-          return await this.answersRepository.create(answer);
-        }),
-      );
-      createQuestionDto.answers = [...answers];
-
       const question = await this.questionsRepository.create(createQuestionDto);
 
       return question;

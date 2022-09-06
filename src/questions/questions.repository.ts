@@ -38,7 +38,7 @@ export class QuestionsRepository {
   async update(id: string, updateQuestionDto: UpdateQuestionDto) {
     try {
       return await this.questionModel
-        .updateOne({ _id: id }, updateQuestionDto)
+        .findByIdAndUpdate({ _id: id }, updateQuestionDto, {new: true})
         .exec();
     } catch (error) {
       throw Error(error.message);

@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Answer } from './answer.schema';
 import { Topic } from './topic.scheme';
-import mongoose, { Document, Mongoose } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Test } from './test.schema';
 
 
 export type QuestionDocument = Question & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Question {
 
   @Prop({ required: true })
