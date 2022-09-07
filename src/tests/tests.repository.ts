@@ -44,8 +44,6 @@ export class TestsRepository {
   }
 
   async findAllByTopic(topicId: string) {
-    const tests = await this.testModel.find({topic: topicId}).exec();
-    console.log(tests.length)
     return await this.testModel.find({topic: topicId}).exec();
   }
 }
